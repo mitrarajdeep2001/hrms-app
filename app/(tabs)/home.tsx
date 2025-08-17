@@ -11,6 +11,30 @@ export default function HomeScreen() {
     { title: "Overtime Hours", value: "12h", icon: "add-circle", bg: "bg-purple-100", textColor: "#6b21a8" },
   ];
 
+  type Attendance = {
+    date: string;
+    status: "Present" | "Absent";
+  };
+
+  const attendance: Attendance[] = [
+    { date: "2025-08-10", status: "Present" },
+    { date: "2025-08-09", status: "Absent" },
+    { date: "2025-08-08", status: "Present" },
+    { date: "2025-08-08", status: "Present" },
+    { date: "2025-08-08", status: "Present" },
+    { date: "2025-08-08", status: "Present" },
+    { date: "2025-08-08", status: "Present" },
+    { date: "2025-08-08", status: "Present" },
+    { date: "2025-08-08", status: "Present" },
+    { date: "2025-08-08", status: "Present" },
+    { date: "2025-08-08", status: "Present" },
+    { date: "2025-08-08", status: "Present" },
+    { date: "2025-08-08", status: "Present" },
+    { date: "2025-08-08", status: "Present" },
+    { date: "2025-08-08", status: "Present" },
+    { date: "2025-08-08", status: "Present" },
+  ]
+
   return (
     <View className="flex-1 bg-gray-50">
       {/* HEADER */}
@@ -45,41 +69,42 @@ export default function HomeScreen() {
       <Text className="text-lg font-semibold mt-6 mb-3 px-4">
         Recent Attendance
       </Text>
-      <FlatList
-        contentContainerStyle={{ paddingHorizontal: 16 }}
-        data={[
-          { date: "2025-08-10", status: "Present" },
-          { date: "2025-08-09", status: "Absent" },
-          { date: "2025-08-08", status: "Present" },
-        ]}
-        keyExtractor={(item, index) => index.toString()}
-        renderItem={({ item }) => {
-          const dateObj = new Date(item.date);
-          const dayName = dateObj.toLocaleDateString("en-US", { weekday: "short" });
-          const isPresent = item.status === "Present";
-          return (
-            <View className="flex-row justify-between items-center bg-white p-4 rounded-lg mb-3 shadow-sm">
-              <View>
-                <Text className="text-gray-700 font-medium">{item.date}</Text>
-                <Text className="text-gray-400 text-sm">{dayName}</Text>
-              </View>
-              <View
-                className={`px-3 py-1 rounded-full ${
-                  isPresent ? "bg-green-100" : "bg-red-100"
-                }`}
-              >
-                <Text
-                  className={`font-semibold ${
-                    isPresent ? "text-green-700" : "text-red-700"
-                  }`}
-                >
-                  {item.status}
-                </Text>
-              </View>
-            </View>
-          );
-        }}
-      />
+      {
+        attendance.length === 0 ? (
+          <View className="items-center justify-center py-6 bg-gray-100 rounded-lg mx-4">
+            <Text className="text-gray-500">No attendance records found</Text>
+          </View>
+        ) :
+          <FlatList
+            contentContainerStyle={{ paddingHorizontal: 16 }}
+            data={attendance}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({ item }) => {
+              const dateObj = new Date(item.date);
+              const dayName = dateObj.toLocaleDateString("en-US", { weekday: "short" });
+              const isPresent = item.status === "Present";
+              return (
+                <View className="flex-row justify-between items-center bg-white p-4 rounded-lg mb-3 shadow-sm">
+                  <View>
+                    <Text className="text-gray-700 font-medium">{item.date}</Text>
+                    <Text className="text-gray-400 text-sm">{dayName}</Text>
+                  </View>
+                  <View
+                    className={`px-3 py-1 rounded-full ${isPresent ? "bg-green-100" : "bg-red-100"
+                      }`}
+                  >
+                    <Text
+                      className={`font-semibold ${isPresent ? "text-green-700" : "text-red-700"
+                        }`}
+                    >
+                      {item.status}
+                    </Text>
+                  </View>
+                </View>
+              );
+            }}
+          />
+      }
     </View>
   );
 }

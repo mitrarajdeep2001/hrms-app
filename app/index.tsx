@@ -20,7 +20,7 @@ export default function LandingScreen() {
       {/* HERO IMAGE */}
       <View className="flex-1 justify-center items-center px-6 mt-12">
         <Image
-          source={{ uri: "../public/logo.jpg" }} // Replace with your own
+          source={require("../public/logo.jpg")} // Replace with your own
           className="w-full h-64"
           resizeMode="contain"
         />
