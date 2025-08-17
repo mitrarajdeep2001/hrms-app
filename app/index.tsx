@@ -1,26 +1,15 @@
 // app/index.tsx
 import { router } from "expo-router";
 import { Image, Text, TouchableOpacity, View } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 import "../global.css";
 
 export default function LandingScreen() {
-  const insets = useSafeAreaInsets();
-
   return (
     <View className="flex-1 bg-white">
-      {/* View behind the status bar for background color */}
-      {/* <View
-        style={{
-          height: insets.top,
-          backgroundColor: "#f9fafb", // same as bg-gray-50
-        }}
-      /> */}
-
       {/* HERO IMAGE */}
       <View className="flex-1 justify-center items-center px-6 mt-12">
         <Image
-          source={require("../public/logo.jpg")} // Replace with your own
+          source={require("../assets/images/icon.png")} // Replace with your own
           className="w-full h-64"
           resizeMode="contain"
         />
